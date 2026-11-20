@@ -144,6 +144,7 @@ p { margin: 0 0 12px; }
 /* Destinations */
 .dest-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 16px; }
 .dest-card { background: #f8fafb; border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+.dest-photo { display: block; width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 12px; }
 .dest-season { font-weight: 700; color: var(--teal); font-size: 0.92rem; }
 
 /* Packages */

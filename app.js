@@ -62,6 +62,8 @@
     });
     document.querySelectorAll(".plan-was").forEach(function (el) {
       el.textContent = period === "first" ? el.getAttribute("data-was-first") : el.getAttribute("data-was-renew");
+      /* Renewal has no discount, so hide the struck-through price entirely on Renewal view. */
+      el.style.display = period === "first" ? "" : "none";
     });
     document.querySelectorAll(".plan-note").forEach(function (el) {
       el.textContent = period === "first" ? el.getAttribute("data-note-first") : el.getAttribute("data-note-renew");
@@ -106,11 +108,11 @@
       flightResults.innerHTML = '<div class="info-box"><strong>Pick two different cities.</strong> From and To cannot be the same city.</div>';
       return;
     }
-    var matches = VERIFIED_FARES.filter(function (f) { return f.from === from && f.to === to; });
+    var matches = VERIFIED_FARES.filter(function (f) { return f.from === from && f.to === to && f.date === date; });
     var html = "";
     if (matches.length === 0) {
-      html = '<div class="info-box"><strong>No stored fare for ' + CITY_NAMES[from] + ' to ' + CITY_NAMES[to] + '.</strong><br>' +
-        'Live fares change daily, so we do not show a guessed price for this route. Check travel.pk for current options, or ask the Travel.pk team on +92 42 3569 2952.</div>';
+      html = '<div class="info-box"><strong>No stored fare for ' + CITY_NAMES[from] + ' to ' + CITY_NAMES[to] + ' on ' + date + '.</strong><br>' +
+        'Live fares change daily, so we do not show a guessed price for this route and date. Check travel.pk for current options, or ask the Travel.pk team on +92 42 3569 2952.</div>';
     } else {
       html = '<p><strong>Results for ' + CITY_NAMES[from] + ' to ' + CITY_NAMES[to] + ', ' + pax + ' passenger' + (pax > 1 ? 's' : '') + '.</strong> Fares checked live in November 2026. Live fares change daily.</p>';
       matches.forEach(function (f) {
